@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package mbp;
+
+option java_package = "com.mbp.model";
+option java_multiple_files = true;
+
+message Input {
+  int32 number = 1;
+}
+
+message Output {
+  string result = 1;
+}
+
+service ServiceRpc {
+  rpc findUnary(Input) returns (Output) {};
+  rpc findBiStream(stream Input) returns (stream Output) {};
+}

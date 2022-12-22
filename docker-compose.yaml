@@ -1,0 +1,16 @@
+version: '3'
+services:
+  grpc-service:
+    build: ./grpc-service
+    image: mbpdocker/grpc-service
+  rest-service:
+    build: ./rest-service
+    image: mbpdocker/rest-service
+  aggregator-service:
+    build: ./aggregator-service
+    image: mbpdocker/aggregator-service
+    ports:
+    - 8080:8080
+    environment:
+      - GRPC_CLIENT_MBP_ADDRESS=static://grpc-service:6565
+      - REST_SERVICE_ENDPOINT=http://rest-service:7575
