@@ -34,13 +34,15 @@ public class GrpcService {
         return map;
     }
 
-    public Object getSquareResponseStream(int number){
-        CompletableFuture<Map<Integer, Integer>> completableFuture = new CompletableFuture<>();
+    public Object getResponseStream(int number){
+        CompletableFuture<Map<Integer, String>> completableFuture = new CompletableFuture<>();
         OutputStreamingResponse outputStreamingResponse = new OutputStreamingResponse(
                 new HashMap<>(),
                 completableFuture
         );
+
         StreamObserver<Input> squareBiStream = this.asyncStub.findBiStream(outputStreamingResponse);
+
         IntStream.rangeClosed(1, number)
                 .mapToObj(i -> Input.newBuilder().setNumber(i).build())
                 .forEach(squareBiStream::onNext);

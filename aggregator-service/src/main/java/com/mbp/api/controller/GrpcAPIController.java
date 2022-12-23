@@ -22,7 +22,7 @@ public class GrpcAPIController {
 
     @GetMapping("/stream/{number}")
     public Object getResponseStream(@PathVariable int number){
-        return this.service.getSquareResponseStream(number);
+        return this.service.getResponseStream(number);
     }
 
 }

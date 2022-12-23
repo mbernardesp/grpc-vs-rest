@@ -8,17 +8,17 @@ import java.util.concurrent.CompletableFuture;
 
 public class OutputStreamingResponse implements StreamObserver<Output> {
 
-    private final Map<Integer, Integer> map;
-    private final CompletableFuture<Map<Integer, Integer>> completableFuture;
+    private final Map<Integer, String> map;
+    private final CompletableFuture<Map<Integer, String>> completableFuture;
 
-    public OutputStreamingResponse(Map<Integer, Integer> map, CompletableFuture<Map<Integer, Integer>> completableFuture) {
+    public OutputStreamingResponse(Map<Integer, String> map, CompletableFuture<Map<Integer, String>> completableFuture) {
         this.map = map;
         this.completableFuture = completableFuture;
     }
 
     @Override
     public void onNext(Output output) {
-        //this.map.put(output.getNumber(), output.getResult());
+        this.map.put(output.getNumber(), output.getResult());
     }
 
     @Override
