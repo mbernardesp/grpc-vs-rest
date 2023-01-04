@@ -18,12 +18,20 @@ public class RestService {
 
     public Object getUnaryResponse(int number){
 
+        //Date start
+        long ds = System.currentTimeMillis();
+
         Map<Integer, String> map = new HashMap<>();
 
         for (int i = 1; i <= number ; i++) {
             ResponseEntity<String> responseEntity = this.restTemplate.getForEntity(this.baseUrl + String.format("/rest/unary/%d", number), String.class);
             map.put(i, responseEntity.getBody());
         }
+
+        //Date end
+        long de = System.currentTimeMillis();
+        System.out.println("Rest:   " + (de-ds) + "ms");
+
         return map;
     }
 

@@ -3,9 +3,13 @@ services:
   grpc-service:
     build: ./grpc-service
     image: mbpdocker/grpc-service
+    ports:
+      - 6565:6565
   rest-service:
     build: ./rest-service
     image: mbpdocker/rest-service
+    ports:
+    - 7575:7575
   aggregator-service:
     build: ./aggregator-service
     image: mbpdocker/aggregator-service

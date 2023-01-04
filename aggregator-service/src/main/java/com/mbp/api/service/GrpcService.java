@@ -23,6 +23,9 @@ public class GrpcService {
 
     public Object getResponseUnary(int number){
 
+        //Date start
+        long ds = System.currentTimeMillis();
+
         Input input = Input.newBuilder().setNumber(number).build();
 
         Map<Integer, String> map = new HashMap<>();
@@ -31,6 +34,11 @@ public class GrpcService {
             Output output = this.blockingStub.findUnary(input);
             map.put(i, output.getResult());
         }
+
+        //Date end
+        long de = System.currentTimeMillis();
+        System.out.println("gRPC:   " + (de-ds) + "ms");
+
         return map;
     }
 
