@@ -23,8 +23,6 @@ public class GrpcService extends ServiceRpcGrpc.ServiceRpcImplBase {
         sb.append("Pellentesque varius elementum lectus non semper. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ");
         sb.append("Aenean cursus, quam in egestas pulvinar, mi sapien ultricies sem, at volutpat mi vivamus.");
 
-        sb.append(request.getNumber() * request.getNumber());
-
         responseObserver.onNext(
                 Output.newBuilder().setResult(sb.toString()).build()
         );
