@@ -22,4 +22,11 @@ public class RestService {
 
         return sb.toString();
     }
+
+    public int getMultiplication(int number1, int number2) {
+
+
+        return number1 * number2;
+    }
+
 }

@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import java.text.SimpleDateFormat;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,9 +32,33 @@ public class RestService {
 
         //Date end
         long de = System.currentTimeMillis();
-        System.out.println("Rest:   " + (de-ds) + "ms");
+        System.out.println("Rest," + (de-ds));
 
         return map;
+    }
+
+    public Object getMultiplicationResponse(int number1, int number2){
+
+
+        for (int i = 1; i < 100 ; i++) {
+
+            //Date start
+            long ds = System.currentTimeMillis();
+
+            ResponseEntity<Integer> responseEntity = this.restTemplate.getForEntity(this.baseUrl + String.format("/rest/multiplication/%d/%d", number1, number2), Integer.class);
+
+            //Date end
+            long de = System.currentTimeMillis();
+            System.out.println("Rest:" + (de-ds));
+
+            try {
+                Thread.sleep(5);
+            } catch (Exception e){
+
+            }
+        }
+
+        return "Ola";
     }
 
 }

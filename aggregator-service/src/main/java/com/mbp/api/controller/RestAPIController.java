@@ -19,4 +19,9 @@ public class RestAPIController {
         return this.service.getUnaryResponse(number);
     }
 
+    @GetMapping("/multiplication/{number1}/{number2}")
+    public Object getResponseMultiplication(@PathVariable int number1, @PathVariable int number2){
+        return this.service.getMultiplicationResponse(number1, number2);
+    }
+
 }

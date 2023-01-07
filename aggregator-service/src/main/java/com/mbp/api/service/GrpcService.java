@@ -7,6 +7,8 @@ import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -37,12 +39,16 @@ public class GrpcService {
 
         //Date end
         long de = System.currentTimeMillis();
-        System.out.println("gRPC:   " + (de-ds) + "ms");
+        System.out.println("gRPC unary," + (de-ds));
 
         return map;
     }
 
     public Object getResponseStream(int number){
+
+        //Date start
+        long ds = System.currentTimeMillis();
+
         CompletableFuture<Map<Integer, String>> completableFuture = new CompletableFuture<>();
         OutputStreamingResponse outputStreamingResponse = new OutputStreamingResponse(
                 new HashMap<>(),
@@ -55,6 +61,11 @@ public class GrpcService {
                 .mapToObj(i -> Input.newBuilder().setNumber(i).build())
                 .forEach(squareBiStream::onNext);
         squareBiStream.onCompleted();
+
+        //Date end
+        long de = System.currentTimeMillis();
+        System.out.println("gRPC stream," + (de-ds));
+
         return completableFuture;
     }
 

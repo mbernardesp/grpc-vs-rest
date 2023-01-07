@@ -19,4 +19,8 @@ public class RestControllerApp {
         return this.restService.getUnary(number);
     }
 
+    @GetMapping("/rest/multiplication/{number1}/{number2}")
+    public int getMultiplication(@PathVariable int number1, @PathVariable int number2){
+        return this.restService.getMultiplication(number1, number2);
+    }
 }
